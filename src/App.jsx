@@ -4,21 +4,17 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 async function test() {
-  const user = {
-    username: "1",
-    password: "1",
-  };
   try {
-    const url = "http://localhost:3000/user/profile";
+    const url = "http://localhost:3000/test";
     const response = await fetch(url, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
 
     const json = await response.json();
+    console.log("authorized path confirmed");
     console.log(json);
   } catch (error) {
     console.log(error);
@@ -71,6 +67,8 @@ async function handleFormLogin(username, password) {
     password: password,
   };
 
+  console.log(JSON.stringify(user));
+
   try {
     const url = "http://localhost:3000/user/login";
     const response = await fetch(url, {
@@ -89,7 +87,9 @@ async function handleFormLogin(username, password) {
 
     // here I probably need to add something to handle if the response is an error
     // or if a user already exists, console logs are not enough for the user
-    console.log(json);
+    console.log(json.token);
+    localStorage.setItem("token", json.token);
+    console.log(localStorage);
   } catch (error) {
     console.log(error);
   }
