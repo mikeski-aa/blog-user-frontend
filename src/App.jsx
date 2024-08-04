@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 async function test() {
-  const url = "http://localhost:3000/user/1";
+  const url = "http://localhost:3000/user/register";
 
   try {
     const response = await fetch(url, { method: "GET" });
@@ -21,17 +21,18 @@ async function test() {
 
 async function userTest() {
   const user = {
-    username: "MyTest",
-    hash: "123DFgkduj23lk8x90z",
+    username: "newuser",
+    password: "test",
   };
 
-  const url = "http://localhost:3000/user/login";
+  const url = "http://localhost:3000/user/register";
 
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify(user),
     });
@@ -47,9 +48,25 @@ async function userTest() {
   }
 }
 
+function handleUserInput(e) {
+  console.log(e.target.value);
+  setUsername(e.target.value);
+}
+
+function handlePasswordInput(e) {
+  console.log(e.target.value);
+  setPassword(e.target.value);
+}
+
+async function handleFormSubmit() {
+  console.log("submit clicked");
+}
+
 function App() {
   const [count, setCount] = useState(0);
-  test();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <>
       <div>
@@ -70,9 +87,22 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <form method="none" onSubmit={(e) => e.preventDefault()}>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            placeholder="Enter your username"
+            onChange={(e) => handleUserInput(e)}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" />
+        </div>
+        <button onClick={() => handleFormSubmit()}>Register</button>
+      </form>
     </>
   );
 }
