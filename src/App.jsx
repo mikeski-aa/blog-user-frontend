@@ -3,31 +3,24 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-async function test() {
-  const url = "http://localhost:3000/user/register";
-
-  try {
-    const response = await fetch(url, { method: "GET" });
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    console.log(json);
-  } catch (error) {
-    console.log(error);
-  }
+function handleUserInput(e, setUsername) {
+  console.log(e.target.value);
+  setUsername(e.target.value);
 }
 
-async function userTest() {
+function handlePasswordInput(e, setPassword) {
+  console.log(e.target.value);
+  setPassword(e.target.value);
+}
+
+async function handleFormSubmit(username, password) {
   const user = {
-    username: "newuser",
-    password: "test",
+    username: username,
+    password: password,
   };
 
-  const url = "http://localhost:3000/user/register";
-
   try {
+    const url = "http://localhost:3000/user/register";
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -40,26 +33,14 @@ async function userTest() {
     if (!response.ok) {
       throw new Error(`Error ${response.status}`);
     }
-
     const json = await response.json();
+
+    // here I probably need to add something to handle if the response is an error
+    // or if a user already exists, console logs are not enough for the user
     console.log(json);
   } catch (error) {
     console.log(error);
   }
-}
-
-function handleUserInput(e) {
-  console.log(e.target.value);
-  setUsername(e.target.value);
-}
-
-function handlePasswordInput(e) {
-  console.log(e.target.value);
-  setPassword(e.target.value);
-}
-
-async function handleFormSubmit() {
-  console.log("submit clicked");
 }
 
 function App() {
@@ -94,14 +75,20 @@ function App() {
             type="text"
             name="username"
             placeholder="Enter your username"
-            onChange={(e) => handleUserInput(e)}
+            onChange={(e) => handleUserInput(e, setUsername)}
           />
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" />
+          <input
+            type="password"
+            name="password"
+            onChange={(e) => handlePasswordInput(e, setPassword)}
+          />
         </div>
-        <button onClick={() => handleFormSubmit()}>Register</button>
+        <button onClick={() => handleFormSubmit(username, password)}>
+          Register
+        </button>
       </form>
     </>
   );
