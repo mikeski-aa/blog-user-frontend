@@ -19,6 +19,34 @@ async function test() {
   }
 }
 
+async function userTest() {
+  const user = {
+    username: "MyTest",
+    hash: "123DFgkduj23lk8x90z",
+  };
+
+  const url = "http://localhost:3000/user/login";
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}`);
+    }
+
+    const json = await response.json();
+    console.log(json);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function App() {
   const [count, setCount] = useState(0);
   test();
@@ -37,6 +65,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <button onClick={() => userTest()}>User test</button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
