@@ -1,26 +1,5 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
 import { Link } from "react-router-dom";
-
-async function test() {
-  try {
-    const url = "http://localhost:3000/test";
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-
-    const json = await response.json();
-    console.log("authorized path confirmed");
-    console.log(json);
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 function handleUserInput(e, setUsername) {
   console.log(e.target.value);
@@ -32,14 +11,16 @@ function handlePasswordInput(e, setPassword) {
   setPassword(e.target.value);
 }
 
-async function handleFormRegister(username, password) {
+async function handleFormLogin(username, password) {
   const user = {
     username: username,
     password: password,
   };
 
+  console.log(JSON.stringify(user));
+
   try {
-    const url = "http://localhost:3000/user/register";
+    const url = "http://localhost:3000/user/login";
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -56,29 +37,20 @@ async function handleFormRegister(username, password) {
 
     // here I probably need to add something to handle if the response is an error
     // or if a user already exists, console logs are not enough for the user
-    console.log(json);
+    console.log(json.token);
+    localStorage.setItem("token", json.token);
+    console.log(localStorage);
   } catch (error) {
     console.log(error);
   }
 }
 
-function App() {
-  const [count, setCount] = useState(0);
+function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   return (
     <>
-      <div>
-        <ul>
-          <li>
-            <Link to="login">Login page</Link>
-          </li>
-        </ul>
-      </div>
-      <div className="card">
-        <button onClick={() => test()}>User test</button>
-      </div>
+      <Link to="/">test</Link>
       <form method="none" onSubmit={(e) => e.preventDefault()}>
         <div>
           <label htmlFor="username">Username</label>
@@ -97,12 +69,12 @@ function App() {
             onChange={(e) => handlePasswordInput(e, setPassword)}
           />
         </div>
-        <button onClick={() => handleFormRegister(username, password)}>
-          Register
+        <button onClick={() => handleFormLogin(username, password)}>
+          Login
         </button>
       </form>
     </>
   );
 }
 
-export default App;
+export default Login;
