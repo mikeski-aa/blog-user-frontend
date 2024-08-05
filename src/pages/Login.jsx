@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Nav from "../components/Nav";
 
 function handleUserInput(e, setUsername) {
   console.log(e.target.value);
@@ -50,7 +51,7 @@ function Login() {
   const [password, setPassword] = useState("");
   return (
     <>
-      <Link to="/">test</Link>
+      <Nav></Nav>
       <form method="none" onSubmit={(e) => e.preventDefault()}>
         <div>
           <label htmlFor="username">Username</label>
