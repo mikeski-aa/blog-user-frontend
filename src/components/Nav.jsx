@@ -1,8 +1,37 @@
 import { Link } from "react-router-dom";
 import Logincheck from "../lib/Loginchecker";
 import { useState } from "react";
+import { useContext } from "react";
+import { LoginContext } from "../App";
 
 function Nav() {
+  const loginContext = useContext(LoginContext);
+
+  const handleLogout = () => {
+    console.log("logout clicked");
+  };
+
+  if (typeof loginContext != "undefined") {
+    if (loginContext.isLogged == true) {
+      return (
+        <>
+          <div className="navBar">
+            <Link to="/">
+              <button>Home</button>
+            </Link>
+            <Link to="/blog">
+              <button>Blog</button>
+            </Link>
+            <Link to="/about">
+              <button>About</button>
+            </Link>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        </>
+      );
+    }
+  }
+
   return (
     <>
       <div className="navBar">
