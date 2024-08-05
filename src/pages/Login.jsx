@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Nav from "../components/Nav";
+import { createContext } from "react";
+import { useEffect } from "react";
 
 function handleUserInput(e, setUsername) {
   console.log(e.target.value);
@@ -49,6 +51,7 @@ async function handleFormLogin(username, password) {
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   return (
     <>
       <Nav></Nav>

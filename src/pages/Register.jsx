@@ -1,23 +1,6 @@
 import Nav from "../components/Nav";
 import { useState } from "react";
-
-async function test() {
-  try {
-    const url = "http://localhost:3000/logincheck";
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-
-    const json = await response.json();
-    console.log("authorized path confirmed");
-    console.log(json);
-  } catch (error) {
-    console.log(error);
-  }
-}
+import { createContext } from "react";
 
 async function handleFormRegister(username, password) {
   const user = {

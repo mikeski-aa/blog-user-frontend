@@ -2,17 +2,35 @@ import { Link } from "react-router-dom";
 import Logincheck from "../lib/Loginchecker";
 import { useState } from "react";
 import { useContext } from "react";
-import { LoginContext } from "../App";
+import { useEffect } from "react";
 
-function Nav() {
-  const loginContext = useContext(LoginContext);
-
+function Nav(props) {
+  const [user, setUser] = useState("");
+  const [isLogged, setIsLogged] = useState("false");
   const handleLogout = () => {
     console.log("logout clicked");
+    localStorage.removeItem("token");
   };
 
-  if (typeof loginContext != "undefined") {
-    if (loginContext.isLogged == true) {
+  // useeffect to handle checking if user is still logged in and setting appropriate states
+  useEffect(() => {
+    const logcheck = async () => {
+      try {
+        const result = await Logincheck();
+        if (result.login === true) {
+          setUser(result.name);
+          setIsLogged(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    logcheck();
+  }, []);
+
+  if (typeof isLogged != "undefined") {
+    if (isLogged == true) {
       return (
         <>
           <div className="navBar">
