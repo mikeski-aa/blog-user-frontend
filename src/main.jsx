@@ -8,6 +8,7 @@ import ErrorPage from "./components/ErrorPage.jsx";
 import Register from "./pages/Register.jsx";
 import Blog from "./pages/Blog.jsx";
 import About from "./pages/About.jsx";
+import Test from "./Test.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,9 +33,11 @@ const router = createBrowserRouter([
     element: <About />,
   },
 ]);
-
+{
+  /* <RouterProvider router={router} /> */
+}
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Test />
   </React.StrictMode>
 );

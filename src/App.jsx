@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <Nav></Nav>
+      {/* <Nav></Nav> */}
       <div className="mainCont">
         <p>Some info about the blog goes here, maybe picture</p>
       </div>
