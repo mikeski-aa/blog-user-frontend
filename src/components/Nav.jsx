@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
+import Logincheck from "../lib/Loginchecker";
+import { useState } from "react";
 
 function Nav() {
-  // here we will have all the click handlers
-
   return (
     <>
       <div className="navBar">
