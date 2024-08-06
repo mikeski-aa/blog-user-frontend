@@ -1,0 +1,14 @@
+.blogPost {
+  display: flex;
+  flex-direction: column;
+}
+
+.postHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.postHeader > p {
+  font-size: smaller;
+}

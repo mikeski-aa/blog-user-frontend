@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Logincheck from "../lib/Loginchecker";
 import { AuthContext } from "../App";
 import BlogPost from "../components/BlogPost";
+import dateConvert from "../lib/Datehelper";
 
 async function fetchBlogposts() {
   const url = "http://localhost:3000/posts";
@@ -43,7 +44,7 @@ function Blog() {
             <BlogPost
               title={post.title}
               user={post.user.username}
-              date={post.date}
+              date={dateConvert(post.date)}
               text={post.text}
               key={post.id}
             />
