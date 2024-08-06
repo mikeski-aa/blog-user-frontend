@@ -39,7 +39,8 @@ function Test() {
   useEffect(() => {
     async function doThis() {
       const result = await Logincheck();
-      console.log(result);
+      console.log(result.login);
+      setStateTest();
     }
 
     doThis();
