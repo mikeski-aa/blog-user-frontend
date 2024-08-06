@@ -2,6 +2,7 @@ import "../styles/BlogPost.css";
 import { useState, useEffect, useContext } from "react";
 import Comment from "./Comment";
 import { AuthContext } from "../App";
+import Logincheck from "../lib/Loginchecker";
 
 // display individual blogpost  in a specific way
 
@@ -16,11 +17,52 @@ async function getCommentsForPost(id) {
   }
 }
 
+// comment post
+async function postComment(text, postid) {
+  console.log(postid);
+  try {
+    // make sure the user is logged in before proceeding
+    const logcheck = await Logincheck();
+
+    if (typeof logcheck === "undefined") {
+      throw new Error(`Error occured with verifying login status`);
+    }
+
+    const newBody = {
+      comment: text,
+      userId: logcheck.id,
+      postId: postid,
+    };
+
+    const url = `http://localhost:3000/comments/new`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(newBody),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}`);
+    }
+
+    const json = await response.json();
+    console.log(json);
+    return (window.location.href = "/blog");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function BlogPost(props) {
   const authContext = useContext(AuthContext);
   const [comments, setComments] = useState([]);
   const [commentVis, setCommentVis] = useState(false);
   const [addCommentVis, setAddCommentVis] = useState(false);
+  const [commentBoxVis, setCommentBox] = useState(false);
+  const [commentText, setCommentText] = useState("");
 
   // setting comment state
   useEffect(() => {
@@ -44,6 +86,18 @@ function BlogPost(props) {
     setCommentVis(!commentVis);
   };
 
+  // toggle new comment box
+  const handleCommentBox = () => {
+    setCommentBox(!commentBoxVis);
+  };
+
+  // handle type text change]
+  const handleTextType = (e) => {
+    setCommentText(e.target.value);
+    console.log(e.target.value);
+    console.log(commentText);
+  };
+
   return (
     <>
       <div className="blogPost">
@@ -55,9 +109,30 @@ function BlogPost(props) {
           <p>{props.text}</p>
           <p>Author: {props.user}</p>
         </div>
-        <button onClick={handleCommentShow}>
-          View {comments.length} comments
-        </button>
+        <div className="blogButtons">
+          <button onClick={handleCommentShow}>
+            View {comments.length} comments
+          </button>
+          <button
+            className={`addBtnVis${addCommentVis}`}
+            onClick={handleCommentBox}
+          >
+            Add comment
+          </button>
+        </div>
+        <div className={`newComment${commentBoxVis}`}>
+          <textarea
+            name="userComment"
+            onChange={(e) => handleTextType(e)}
+          ></textarea>
+          <button
+            className="commentSubmit"
+            onClick={() => postComment(commentText, props.id)}
+          >
+            Submit new comment
+          </button>
+        </div>
+
         <div className={`commentVis${commentVis}`}>
           {comments.map((comment) => (
             <Comment
@@ -68,7 +143,6 @@ function BlogPost(props) {
             />
           ))}
         </div>
-        <button className={`addBtnVis${addCommentVis}`}>Add comment</button>
       </div>
     </>
   );

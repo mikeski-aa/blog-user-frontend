@@ -33,6 +33,7 @@ function Blog() {
       try {
         const result = await Logincheck();
         if (result) {
+          console.log(result);
           authContext.setAuthState(true);
         }
       } catch (error) {
@@ -60,7 +61,6 @@ function Blog() {
       <>
         <Nav></Nav>
         <div className="mainContent">
-          <p>This is where the blog posts will go</p>
           <div className="blogposts">No posts were found</div>
         </div>
       </>
@@ -71,7 +71,6 @@ function Blog() {
     <>
       <Nav></Nav>
       <div className="mainContent">
-        <p>This is where the blog posts will go</p>
         <div className="blogposts">
           {posts.map((post) => (
             <BlogPost
