@@ -1,15 +1,27 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Nav from "../components/Nav";
-import { TestContext } from "../Test";
+import { AuthContext } from "../App";
+import Logincheck from "../lib/Loginchecker";
 
 function Home() {
-  const testContext = useContext(TestContext);
+  const authContext = useContext(AuthContext);
 
-  console.log(testContext.stateTest);
+  useEffect(() => {
+    async function doThis() {
+      const result = await Logincheck();
+      if (result) {
+        authContext.setStateTest(true);
+      }
+    }
+
+    doThis();
+  }, []);
+
+  console.log(authContext.stateTest);
   return (
     <>
       <Nav />
-      <p>Home loaded</p>
+      <p>Welcome to my blog!</p>
     </>
   );
 }

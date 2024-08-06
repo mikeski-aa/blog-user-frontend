@@ -4,6 +4,8 @@ import Nav from "../components/Nav";
 import { createContext } from "react";
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../App";
 
 function handleUserInput(e, setUsername) {
   console.log(e.target.value);
@@ -44,7 +46,6 @@ async function handleFormLogin(username, password) {
     console.log(json.token);
     localStorage.setItem("token", json.token);
     console.log(localStorage);
-    return <Navigate to="/" />;
   } catch (error) {
     console.log(error);
   }

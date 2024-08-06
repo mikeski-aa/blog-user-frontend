@@ -8,10 +8,10 @@ import ErrorPage from "./components/ErrorPage.jsx";
 import Register from "./pages/Register.jsx";
 import Blog from "./pages/Blog.jsx";
 import About from "./pages/About.jsx";
-import Test from "./Test.jsx";
+// import Test from "./Test.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Test />
+    <App />
   </React.StrictMode>
 );
