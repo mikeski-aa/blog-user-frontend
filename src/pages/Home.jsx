@@ -10,14 +10,14 @@ function Home() {
     async function doThis() {
       const result = await Logincheck();
       if (result) {
-        authContext.setStateTest(true);
+        authContext.setAuthState(true);
       }
     }
 
     doThis();
   }, []);
 
-  console.log(authContext.stateTest);
+  console.log(authContext.authState);
   return (
     <>
       <Nav />

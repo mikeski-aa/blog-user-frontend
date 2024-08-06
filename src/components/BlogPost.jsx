@@ -1,6 +1,7 @@
 import "../styles/BlogPost.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Comment from "./Comment";
+import { AuthContext } from "../App";
 
 // display individual blogpost  in a specific way
 
@@ -16,9 +17,12 @@ async function getCommentsForPost(id) {
 }
 
 function BlogPost(props) {
+  const authContext = useContext(AuthContext);
   const [comments, setComments] = useState([]);
   const [commentVis, setCommentVis] = useState(false);
+  const [addCommentVis, setAddCommentVis] = useState(false);
 
+  // setting comment state
   useEffect(() => {
     const getComments = async () => {
       const result = await getCommentsForPost(props.id);
@@ -27,13 +31,18 @@ function BlogPost(props) {
     getComments();
   }, []);
 
+  // set new comment visibility state
+  useEffect(() => {
+    if (authContext.authState === false) {
+      setAddCommentVis(false);
+    } else {
+      setAddCommentVis(true);
+    }
+  }, []);
   // toggle comment visibility
   const handleCommentShow = () => {
     setCommentVis(!commentVis);
-    console.log(commentVis);
   };
-
-  console.log(comments.length);
 
   return (
     <>
@@ -59,7 +68,7 @@ function BlogPost(props) {
             />
           ))}
         </div>
-        <button>Add comment</button>
+        <button className={`addBtnVis${addCommentVis}`}>Add comment</button>
       </div>
     </>
   );

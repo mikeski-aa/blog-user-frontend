@@ -9,7 +9,7 @@ function About() {
     async function doThis() {
       const result = await Logincheck();
       if (result) {
-        authContext.setStateTest(true);
+        authContext.setAuthState(true);
       }
     }
 

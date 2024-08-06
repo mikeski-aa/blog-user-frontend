@@ -12,7 +12,6 @@ async function fetchBlogposts() {
   try {
     const response = await fetch(url, { method: "GET" });
     const json = await response.json();
-    console.log(json.posts);
     return json.posts;
   } catch (error) {
     console.log(error);
@@ -38,7 +37,7 @@ function Blog() {
     async function doThis() {
       const result = await Logincheck();
       if (result) {
-        authContext.setStateTest(true);
+        authContext.setAuthSate(true);
       }
     }
 

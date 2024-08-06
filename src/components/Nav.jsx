@@ -34,7 +34,7 @@ function Nav() {
   //   );
   // }
 
-  if (authContext.stateTest == true) {
+  if (authContext.authState == true) {
     return (
       <>
         <div className="navBar">

@@ -51,3 +51,11 @@
   scale: 0;
   max-height: 0;
 }
+
+.addBtnVisfalse {
+  display: none;
+}
+
+.addBtnVistrue {
+  display: block;
+}

@@ -36,10 +36,10 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [stateTest, setStateTest] = useState(false);
+  const [authState, setAuthState] = useState(false);
 
   return (
-    <AuthContext.Provider value={{ stateTest, setStateTest }}>
+    <AuthContext.Provider value={{ authState, setAuthState }}>
       <RouterProvider router={router} />
     </AuthContext.Provider>
   );
