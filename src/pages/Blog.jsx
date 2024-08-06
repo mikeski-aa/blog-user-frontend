@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Logincheck from "../lib/Loginchecker";
 import { AuthContext } from "../App";
+import BlogPost from "../components/BlogPost";
 
 async function fetchBlogposts() {
   const url = "http://localhost:3000/posts";
@@ -39,7 +40,13 @@ function Blog() {
         <p>This is where the blog posts will go</p>
         <div className="blogposts">
           {posts.map((post) => (
-            <p>{post.title}</p>
+            <BlogPost
+              title={post.title}
+              user={post.user.username}
+              date={post.date}
+              text={post.text}
+              key={post.id}
+            />
           ))}
         </div>
       </div>
