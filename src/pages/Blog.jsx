@@ -12,6 +12,8 @@ async function fetchBlogposts() {
   try {
     const response = await fetch(url, { method: "GET" });
     const json = await response.json();
+    console.log("json from promise");
+    console.log(json);
     return json.posts;
   } catch (error) {
     console.log(error);
@@ -22,27 +24,48 @@ function Blog() {
   // i need to call the get API for blog posts
   const authContext = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
-  const [isLogged, setIsLogged] = useState("false");
+
+  console.log("check auth state");
+  console.log(authContext.authState);
+
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const result = await Logincheck();
+        if (result) {
+          authContext.setAuthState(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     const getPosts = async () => {
       let result = await fetchBlogposts();
+      console.log(result);
       setPosts(result);
     };
 
     getPosts();
   }, []);
 
-  useEffect(() => {
-    async function doThis() {
-      const result = await Logincheck();
-      if (result) {
-        authContext.setAuthSate(true);
-      }
-    }
+  console.log(posts);
 
-    doThis();
-  }, []);
+  if (typeof posts === "undefined") {
+    return (
+      <>
+        <Nav></Nav>
+        <div className="mainContent">
+          <p>This is where the blog posts will go</p>
+          <div className="blogposts">No posts were found</div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>

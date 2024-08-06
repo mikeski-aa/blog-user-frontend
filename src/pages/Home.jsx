@@ -17,7 +17,6 @@ function Home() {
     doThis();
   }, []);
 
-  console.log(authContext.authState);
   return (
     <>
       <Nav />

@@ -1,10 +1,13 @@
 import Nav from "../components/Nav";
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import Logincheck from "../lib/Loginchecker";
+import { AuthContext } from "../App";
 
 function About() {
+  const authContext = useContext(AuthContext);
+
   useEffect(() => {
     async function doThis() {
       const result = await Logincheck();
