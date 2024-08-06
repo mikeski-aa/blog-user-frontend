@@ -10,32 +10,6 @@ import Blog from "./pages/Blog.jsx";
 import About from "./pages/About.jsx";
 import Test from "./Test.jsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/blog",
-    element: <Blog />,
-  },
-  {
-    path: "/about",
-    element: <About />,
-  },
-]);
-{
-  /* <RouterProvider router={router} /> */
-}
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Test />
