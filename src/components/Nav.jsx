@@ -12,6 +12,7 @@ function Nav() {
   const handleLogout = () => {
     console.log("logout clicked");
     localStorage.removeItem("token");
+    window.location.href = "/";
   };
 
   // if (isLoading) {

@@ -34,6 +34,17 @@ function Blog() {
     getPosts();
   }, []);
 
+  useEffect(() => {
+    async function doThis() {
+      const result = await Logincheck();
+      if (result) {
+        authContext.setStateTest(true);
+      }
+    }
+
+    doThis();
+  }, []);
+
   return (
     <>
       <Nav></Nav>
@@ -46,6 +57,7 @@ function Blog() {
               user={post.user.username}
               date={dateConvert(post.date)}
               text={post.text}
+              id={post.id}
               key={post.id}
             />
           ))}

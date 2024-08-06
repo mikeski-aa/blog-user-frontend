@@ -5,10 +5,49 @@
 
 .postHeader {
   display: flex;
-  align-items: center;
   gap: 20px;
+  align-items: center;
+}
+
+.postHeader > h3 {
+  margin: 0;
+  padding: 0;
 }
 
 .postHeader > p {
-  font-size: smaller;
+  font-size: 0.7rem;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: grey;
+}
+
+.postBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.postBody > p {
+  margin: 0;
+  padding: 0;
+}
+
+.blogposts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.commentVistrue {
+  opacity: 1;
+  scale: 1;
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: scale(), opacity();
+  max-height: 1;
+}
+
+.commentVisfalse {
+  opacity: 0;
+  scale: 0;
+  max-height: 0;
 }

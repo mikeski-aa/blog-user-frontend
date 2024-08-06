@@ -35,7 +35,9 @@ async function handleFormRegister(username, password) {
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   // input handlers
+  // need to add validation handling for spaces or forbidden characters
   const handlePasswordInput = (e, setPassword) => {
     console.log(e.target.value);
     setPassword(e.target.value);

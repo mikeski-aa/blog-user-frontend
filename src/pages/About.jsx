@@ -5,6 +5,16 @@ import { useEffect } from "react";
 import Logincheck from "../lib/Loginchecker";
 
 function About() {
+  useEffect(() => {
+    async function doThis() {
+      const result = await Logincheck();
+      if (result) {
+        authContext.setStateTest(true);
+      }
+    }
+
+    doThis();
+  }, []);
   return (
     <>
       <Nav></Nav>

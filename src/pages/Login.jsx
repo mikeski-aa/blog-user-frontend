@@ -7,16 +7,6 @@ import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../App";
 
-function handleUserInput(e, setUsername) {
-  console.log(e.target.value);
-  setUsername(e.target.value);
-}
-
-function handlePasswordInput(e, setPassword) {
-  console.log(e.target.value);
-  setPassword(e.target.value);
-}
-
 async function handleFormLogin(username, password) {
   const user = {
     username: username,
@@ -46,6 +36,7 @@ async function handleFormLogin(username, password) {
     console.log(json.token);
     localStorage.setItem("token", json.token);
     console.log(localStorage);
+    window.location.href = "/";
   } catch (error) {
     console.log(error);
   }
@@ -54,6 +45,17 @@ async function handleFormLogin(username, password) {
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  // need to add validation handling for spaces or forbidden characters
+  const handleUserInput = (e, setUsername) => {
+    console.log(e.target.value);
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordInput = (e, setPassword) => {
+    console.log(e.target.value);
+    setPassword(e.target.value);
+  };
 
   return (
     <>
