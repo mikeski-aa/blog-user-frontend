@@ -21,16 +21,8 @@ async function getCommentsForPost(id) {
 async function postComment(text, postid) {
   console.log(postid);
   try {
-    // make sure the user is logged in before proceeding
-    const logcheck = await Logincheck();
-
-    if (typeof logcheck === "undefined") {
-      throw new Error(`Error occured with verifying login status`);
-    }
-
     const newBody = {
       comment: text,
-      userId: logcheck.id,
       postId: postid,
     };
 
@@ -40,6 +32,7 @@ async function postComment(text, postid) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: JSON.stringify(newBody),
     });

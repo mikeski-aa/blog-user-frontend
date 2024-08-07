@@ -24,9 +24,15 @@ async function handleFormRegister(username, password) {
     }
     const json = await response.json();
 
+    if (json.error) {
+      console.log(json);
+      return;
+    } else {
+      window.location.href = "/login";
+    }
+
     // here I probably need to add something to handle if the response is an error
     // or if a user already exists, console logs are not enough for the user
-    console.log(json);
   } catch (error) {
     console.log(error);
   }
@@ -50,10 +56,6 @@ function Register() {
   return (
     <>
       <Nav></Nav>
-
-      <div className="card">
-        <button onClick={() => test()}>User test</button>
-      </div>
       <form method="none" onSubmit={(e) => e.preventDefault()}>
         <div>
           <label htmlFor="username">Username</label>
