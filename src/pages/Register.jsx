@@ -56,28 +56,32 @@ function Register() {
   return (
     <>
       <Nav></Nav>
-      <form method="none" onSubmit={(e) => e.preventDefault()}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            placeholder="Enter your username"
-            onChange={(e) => handleUserInput(e, setUsername)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            onChange={(e) => handlePasswordInput(e, setPassword)}
-          />
-        </div>
-        <button onClick={() => handleFormRegister(username, password)}>
-          Register
-        </button>
-      </form>
+      <div className="mainContent">
+        <h2>Register</h2>
+
+        <form method="none" onSubmit={(e) => e.preventDefault()}>
+          <div>
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter your username"
+              onChange={(e) => handleUserInput(e, setUsername)}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              onChange={(e) => handlePasswordInput(e, setPassword)}
+            />
+          </div>
+          <button onClick={() => handleFormRegister(username, password)}>
+            Register
+          </button>
+        </form>
+      </div>
     </>
   );
 }

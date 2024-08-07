@@ -41,9 +41,12 @@ const router = createBrowserRouter([
 
 function App() {
   const [authState, setAuthState] = useState(false);
+  const [currentUser, setCurrentUser] = useState("");
 
   return (
-    <AuthContext.Provider value={{ authState, setAuthState }}>
+    <AuthContext.Provider
+      value={{ authState, setAuthState, currentUser, setCurrentUser }}
+    >
       <RouterProvider router={router} />
     </AuthContext.Provider>
   );

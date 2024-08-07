@@ -67,3 +67,7 @@
 .newCommenttrue {
   display: block;
 }
+
+.commentContainer {
+  background-color: white;
+}

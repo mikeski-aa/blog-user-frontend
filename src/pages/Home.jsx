@@ -11,6 +11,7 @@ function Home() {
       const result = await Logincheck();
       if (result) {
         authContext.setAuthState(true);
+        authContext.setCurrentUser(result.name);
       }
     }
 
@@ -20,7 +21,9 @@ function Home() {
   return (
     <>
       <Nav />
-      <p>Welcome to my blog!</p>
+      <div className="mainContent">
+        <p>Welcome to my blog!</p>
+      </div>
     </>
   );
 }

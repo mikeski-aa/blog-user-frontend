@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../App";
+import "../styles/Nav.css";
 
 function Nav() {
   const authContext = useContext(AuthContext);
@@ -15,39 +16,26 @@ function Nav() {
     window.location.href = "/";
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <>
-  //       <div className="navBar">
-  //         <Link to="/">
-  //           <button>Home</button>
-  //         </Link>
-  //         <Link to="/blog">
-  //           <button>Blog</button>
-  //         </Link>
-  //         <Link to="/about">
-  //           <button>About</button>
-  //         </Link>
-  //         <button onClick={handleLogout}>Logout</button>
-  //       </div>
-  //     </>
-  //   );
-  // }
-
   if (authContext.authState == true) {
     return (
       <>
         <div className="navBar">
+          <div className="loggedUser">
+            <h4>Welcome</h4>
+            <h3>{authContext.currentUser}</h3>
+          </div>
           <Link to="/">
-            <button>Home</button>
+            <button className="navBtn">Home</button>
           </Link>
           <Link to="/blog">
-            <button>Blog</button>
+            <button className="navBtn">Blog</button>
           </Link>
           <Link to="/about">
-            <button>About</button>
+            <button className="navBtn">About</button>
           </Link>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className="navBtn">
+            Logout
+          </button>
         </div>
       </>
     );
@@ -56,20 +44,21 @@ function Nav() {
   return (
     <>
       <div className="navBar">
+        <div className="loggedUser"></div>
         <Link to="/">
-          <button>Home</button>
+          <button className="navBtn">Home</button>
         </Link>
         <Link to="/blog">
-          <button>Blog</button>
+          <button className="navBtn">Blog</button>
         </Link>
         <Link to="/login">
-          <button>Login</button>
+          <button className="navBtn">Login</button>
         </Link>
         <Link to="/register">
-          <button>Register</button>
+          <button className="navBtn">Register</button>
         </Link>
         <Link to="/about">
-          <button>About</button>
+          <button className="navBtn">About</button>
         </Link>
       </div>
     </>

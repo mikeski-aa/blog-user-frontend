@@ -35,6 +35,7 @@ function Blog() {
         if (result) {
           console.log(result);
           authContext.setAuthState(true);
+          authContext.setCurrentUser(result.name);
         }
       } catch (error) {
         console.log(error);

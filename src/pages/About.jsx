@@ -13,6 +13,7 @@ function About() {
       const result = await Logincheck();
       if (result) {
         authContext.setAuthState(true);
+        authContext.setCurrentUser(result.name);
       }
     }
 
@@ -22,7 +23,9 @@ function About() {
     <>
       <Nav></Nav>
       <div className="mainContent">
-        <p>This is where the about page will go</p>
+        <div>
+          <p>This is where the about page will go</p>
+        </div>
       </div>
     </>
   );
